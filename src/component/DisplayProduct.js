@@ -25,7 +25,7 @@ function DisplayProduct(props) {
     const uniqueCats = [];
 
       const uniqueCategory = filteredDatabyStocked(filteredData).filter(element => {
-        const isDuplicate = uniqueCats.includes(element.category);
+      const isDuplicate = uniqueCats.includes(element.category);
 
         if (!isDuplicate) {
             uniqueCats.push(element.category);
@@ -34,24 +34,34 @@ function DisplayProduct(props) {
         return false;
       });
 
-      const header = uniqueCategory.map((post) =>
-      <div>
-            <h4>{post.category}</h4>
+      const styles = {
+        display: 'flex',
+        justifyContent: 'center',
+             
+      };
+
+      const ProductRow = uniqueCategory.map((post) =>
+            <>
+            <h3>{post.category}</h3>
             <ul>
+            
           {filteredDatabyStocked(filteredData).filter(param => param.category === post.category).map((element) =>
-            <li key={element.key}><span style ={{color:element.stocked === false && "red"}}>{element.name}</span>{"\u00a0\u00a0"}<span>{element.price}</span>
-            </li>
+           <React.Fragment key={element.key}>
+                <dt style ={{color:element.stocked === false && "red"}}>{element.name}{"\u00a0\u00a0"}<span>{element.price}</span></dt>
+                
+           </React.Fragment>
+          
           )}
-            </ul>
-       </div>
-   
+         </ul>
+        </>
+          
         
       );
 
     return (
         <div>
         <h3>Name{"\u00a0\u00a0"}Price</h3>
-        {header }
+        {ProductRow }
         </div>
     )
 }

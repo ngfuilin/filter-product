@@ -1,10 +1,11 @@
 import React from "react";
 import DisplayProduct from "./DisplayProduct";
+import SearchBar from "./SearchBar";
 
 class FilterProduct extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {filterText: '', inStockOnly: true};
+        this.state = {filterText: '', inStockOnly: false};
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     }
@@ -22,10 +23,10 @@ class FilterProduct extends React.Component {
         const chkinStockOnly = this.state.inStockOnly;
         return (
             <div>
-                <input type='text' name='filterText' placeholder='search...' value={this.state.filterText} onChange={this.handleTextChange}></input>
-                <br/>
-                <input type="checkbox" checked={this.state.inStockOnly} onChange={this.handleCheckboxChange}/>
-                <span>Only show products in stock</span>
+                <SearchBar filterText={searchText} 
+                    inStockOnly={chkinStockOnly}
+                    handleTextChange = {this.handleTextChange}
+                    handleCheckboxChange = {this.handleCheckboxChange}/>
                 <DisplayProduct 
                     products={this.props.products}
                     input = {searchText} 
